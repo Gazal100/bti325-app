@@ -7,7 +7,7 @@ other source
 *
 * Name: Gazal Garg     Student ID: 107140212      Date: October01, 2022
 *
-* Your app’s URL (from Cyclic) : https://teal-clever-walrus.cyclic.app/
+* Your app’s URL (from Cyclic) : https://brave-erin-glasses.cyclic.app/
 *
 *************************************************************************/
 
