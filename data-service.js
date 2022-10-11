@@ -8,8 +8,8 @@ module.exports.initialize = function(){
             if (err) reject("Failure to read file employees.json!");
             else {
                 employees = JSON.parse(data)
-                fs.readFile('./data/employees.json',(err,data)=>{
-                    if (err) reject("Failure to read file employees.json!");
+                fs.readFile('./data/departments.json',(err,data)=>{
+                    if (err) reject("Failure to read file departments.json!");
                     else departments = JSON.parse(data);
                         resolve("Successful")});
                 }
