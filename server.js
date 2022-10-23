@@ -1,5 +1,5 @@
 /*************************************************************************
-* BTI325– Assignment 2
+* BTI325– Assignment 3
 * I declare that this assignment is my own work in accordance with Seneca Academic
 Policy. No part * of this assignment has been copied manually or electronically from any
 other source
@@ -7,7 +7,7 @@ other source
 *
 * Name: Gazal Garg     Student ID: 107140212      Date: October01, 2022
 *
-* Your app’s URL (from Cyclic) : https://brave-erin-glasses.cyclic.app/
+* Your app’s URL (from Heroku) : https://desolate-ravine-07061.herokuapp.com/
 *
 *************************************************************************/
 
