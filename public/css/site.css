@@ -1,5 +1,13 @@
 body, html{
-    background-color: rgb(117, 83, 159); 
-    color: whitesmoke;
+    background-image: url('/images/business.jpg');
+    color: grey;
 }
 
+.container{
+    background-color: rgba(0, 0, 0, 0.7);
+    color: rgb(255, 255, 255);
+    }
+    
+h2{
+    color: rgb(255, 255, 255);
+}

@@ -46,3 +46,62 @@ module.exports.getDepartments = function(){
             resolve(departments);
     })
 }
+
+module.exports.addEmployee = (employeeData) => {
+    return new Promise((resolve, reject) => {
+        
+        if (typeof employeeData.isManager === "undefined") {
+             employeeData.isManager = false;
+        } else {
+             employeeData.isManager = true;
+        }
+        employeeData.employeeNum = employees.length + 1;
+        employees.push(employeeData);
+
+        if(employeeData) resolve (employees);
+        else reject("Error adding post!");
+    })
+}
+
+module.exports.getEmployeesByStatus = function(status){
+    return new Promise((resolve, reject) => {
+        const EmployeesStatus = []
+        for (let i = 0; i < employees.length; ++i) {
+            if (employees[i].status == status) EmployeesStatus.push(employees[i])
+        }
+        if (EmployeesStatus.length == 0) reject(Error("no employees found with this status"))
+        else resolve(EmployeesStatus)
+    })
+}
+
+module.exports.getEmployeesByDepartment = function(department){
+    return new Promise((resolve, reject) => {
+        const EmployeesDepartment = []
+        for (let i = 0; i < employees.length; ++i) {
+            if (employees[i].department == department) EmployeesDepartment.push(employees[i])
+        }
+        if (EmployeesDepartment.length == 0) reject(Error("no employees found in this department"))
+        else resolve(EmployeesDepartment)
+    })
+}
+
+module.exports.getEmployeesByManager = function(manager){
+    return new Promise((resolve, reject) => {
+        const employeesManager = []
+        for (let i = 0; i < employees.length; i++) {
+            if (employees[i].employeeManagerNum == manager) employeesManager.push(employees[i])
+        }
+        if (employeesManager.length == 0) reject(Error("no employees found with this condition(manager)"))
+        else resolve(employeesManager)
+    })
+}
+
+module.exports.getEmployeeByNum = function(value){
+    return new Promise((resolve, reject) => {
+        const employee = employees.filter((e) => {
+            return e.employeeNum == value
+        })
+        if (!employee) reject(Error("no employee found with this Employee Number"))
+        resolve(employee)
+    })
+}

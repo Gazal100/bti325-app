@@ -16,6 +16,9 @@ var express = require("express");
 var data = require("./data-service.js");
 var app = express();
 var path = require("path");
+var multer = require("multer")
+let fs = require('fs');
+let images = [];
 
 //listen on process.env.PORT || 8080
 var HTTP_PORT = process.env.PORT || 8080;
@@ -24,7 +27,19 @@ function onHttpStart(){
     console.log("Express http server listening on " + HTTP_PORT);
 }
 
+const storage = multer.diskStorage({
+    destination: "./public/images/uploaded",
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + path.extname(file.originalname));
+    } 
+});
+
+const upload = multer({ storage: storage });
+
 app.use(express.static('public')); //to get accurate css file
+
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 //Setting route for the home page
 app.get("/", function(req, res){
@@ -38,9 +53,32 @@ app.get("/about", function(req, res){
 
 //Setting up route to get all employees
 app.get("/employees", function(req, res){
-    data.getAllEmployees()
-    .then((data) => {res.json(data)})
-    .catch((err) => {res.json({message: err})})
+    if (req.query.status) {
+        data.getEmployeesByStatus(req.query.status)
+        .then((data) => {res.json(data)})
+        .catch((err) => {res.json({message: err})})
+    }
+    else if (req.query.department) {
+        data.getEmployeesByDepartment(req.query.department)
+        .then((data) => {res.json(data)})
+        .catch((err) => {res.json({message: err})})
+    }
+    else if (req.query.manager) {
+        data.getEmployeesByManager(req.query.manager)
+        .then((data) => {res.json(data)})
+        .catch((err) => {res.json({message: err})})
+    }
+    else{
+        data.getAllEmployees()
+        .then((data) => {res.json(data)})
+        .catch((err) => {res.json({message: err})})
+    }
+})
+
+app.get("/employee/:value", function(req, res){
+        data.getEmployeeByNum(req.params.value)
+        .then((data) => {res.json(data)})
+        .catch((err) => {res.json({message: err})})   
 })
 
 //Setting up route to get only the managers
@@ -55,6 +93,34 @@ app.get("/departments", function(req, res){
     data.getDepartments()
     .then((data) => {res.json(data)})
     .catch((err) => {res.json({message: err})})
+});
+
+//Setting up route to get the add employee page
+app.get("/employees/add", function(req, res){
+    res.sendFile(path.join(__dirname, "/views/addEmployee.html"));
+});
+
+//Setting up route to get the add image page
+app.get("/images/add", function(req, res){
+    res.sendFile(path.join(__dirname, "/views/addImage.html"));
+});
+
+app.post("/images/add", upload.single("imageFile"), (req, res) => {
+    res.redirect("/images");
+});
+
+app.post("/employees/add", (req, res) => {
+    data.addEmployee(req.body)
+    .then(() => {res.redirect('/employees')})
+    .catch((err) => {res.json({ message: err })})
+});
+
+app.get("/images", (req, res) => {
+    const dir = "./public/images/uploaded";
+    fs.readdir(dir, function (err, items) {
+      images.push(items)
+      res.json({images})
+    });
 });
 
 //Set up a route if no route is matched

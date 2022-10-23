@@ -10,6 +10,9 @@
   "author": "Gazal Garg",
   "license": "ISC",
   "dependencies": {
-    "express": "^4.18.1"
+    "express": "^4.18.1",
+    "fs": "^0.0.1-security",
+    "multer": "^1.4.5-lts.1",
+    "nodemon": "^2.0.20"
   }
 }
