@@ -18,16 +18,17 @@ module.exports.initialize = function(){
 }
 
 module.exports.getAllEmployees = function(){
-    return new Promise(function(reject, resolve){
-        if(employees.length == 0) 
-            reject("no results found");
-        else
+    return new Promise(function(resolve, reject){
+        if(employees.length == 0){
+            reject("no results found");}
+        else{
             resolve(employees);
+        }
     })
 }
 
 module.exports.getManagers = function(){
-    return new Promise(function(reject, resolve){
+    return new Promise(function(resolve, reject){
         let managers = employees.filter(function(employee){
             return employee.isManager;
         });
@@ -39,7 +40,7 @@ module.exports.getManagers = function(){
 }
 
 module.exports.getDepartments = function(){
-    return new Promise(function(reject, resolve){
+    return new Promise(function(resolve, reject){
         if(departments.length == 0)
             reject("no results found");
         else
@@ -103,5 +104,21 @@ module.exports.getEmployeeByNum = function(value){
         })
         if (!employee) reject(Error("no employee found with this Employee Number"))
         resolve(employee)
+    })
+}
+
+module.exports.updateEmployee = function (employeeData) {
+    return new Promise((resolve, reject)=> {
+        if (employees.length == 0) {
+            reject("no results found");
+        }
+        else {
+            for (var i in employees) {
+                if (employees[i].SSN == employeeData.SSN) {
+                  employees[i] = employeeData;              
+                }
+            }
+            resolve();
+        }
     })
 }
