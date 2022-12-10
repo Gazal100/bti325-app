@@ -1,0 +1,81 @@
+<div class="row">
+  <div class="col-md-12">
+    {{#if errorMessage}}
+      <div class="alert alertdanger">
+        <strong>Error:</strong>
+        {{errorMessage}}</div>
+    {{/if}}
+    <h2>Sign Up</h2>
+    <br>
+    {{#if successMessage}}
+      <div class="alert alert-success">
+        <strong>Success:</strong>
+        {{successMessage}}</div><a
+        class="btn btn-success pull-right"
+        href="/login">&nbsp;&nbsp;&nbsp;Proceed to Log in&nbsp;&nbsp;&nbsp;</a><br><br><br>
+    {{else}}
+      <form method="post" action="/register">
+        <fieldset>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="userName"></label>
+                <input
+                  class="form-control"
+                  id="userName"
+                  name="userName"
+                  placeholder="User Name"
+                  type="text"
+                  value="{{userName}}" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="password"></label>
+                <input
+                  class="form-control"
+                  id="password"
+                  name="password"
+                  placeholder="password"
+                  type="password" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="password2"></label>
+                <input
+                  class="form-control"
+                  id="password2"
+                  name="password2"
+                  placeholder="Confirm Password"
+                  type="password" required>
+              </div>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label for="Email Address"></label>
+                <input
+                  class="form-control"
+                  id="Email Address"
+                  name="email"
+                  placeholder="Email Address"
+                  type="email" required>
+              </div>
+            </div>
+          </div>
+        </fieldset>
+        <hr>
+        <input
+          type="submit"
+          class="btn btn-primary pull-right"
+          value="Register"/><br><br><br>
+      </form>
+    {{/if}}
+  </div>
+</div>

@@ -143,7 +143,10 @@ module.exports.updateEmployee = function (employeeData) {
         }
         Employee.update(employeeData,
             {where: {employeeNum: employeeData.employeeNum}})
-            .then((result) => {resolve(result)})
+            .then((result) => {
+                console.log(employeeData)
+                resolve(result)
+            })
             .catch((err) => {reject("unable to update employee")
         });
     })

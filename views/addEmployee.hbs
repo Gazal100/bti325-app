@@ -90,9 +90,9 @@
             <div class="form-group">
               <label for="department">Department</label>
               {{#if departments}}
-              <select class="form-control" name="DepartmentDepartmentId" id="DepartmentDepartmentId">
+              <select class="form-control" name="department" id="department">
                 {{#each departments}}
-                <option value="{{this.departmentId}}">{{this.departmentName}}</option>
+                <option value={{this.departmentId}}>{{this.departmentName}}</option>
                 {{/each}}
               </select>
               {{else}}
